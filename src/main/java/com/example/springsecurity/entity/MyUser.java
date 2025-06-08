@@ -8,7 +8,7 @@ import lombok.Setter;
 import java.util.List;
 
 @Entity
-@Table(name="users", schema = "member")
+@Table(name="users")
 @Getter
 @Setter
 @NoArgsConstructor
