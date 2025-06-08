@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:insert="~{common :: commonHead}">
+  <title>제품 관리 사이트</title>
+</head>
+
+<body>
+<div class="container">
+  <h1 class="mt-5">제품 리스트</h1>
+
+  <div sec:authorize="hasRole('ROLE_ADMIN')">
+    <a class="btn btn-primary mb-3" th:href="@{/products/new}">새 제품 등록하기</a>
+  </div>
+
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th>제품 아이디</th>
+      <th>제품명</th>
+      <th>브랜드</th>
+      <th>제조국</th>
+      <th>가격</th>
+      <th>관리</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product : ${listProducts}">
+      <td th:text="${product.id}">제품 아이디</td>
+      <td th:text="${product.name}">제품명</td>
+      <td th:text="${product.brand}">브랜드</td>
+      <td th:text="${product.madeIn}">제조국</td>
+      <td th:text="${product.price}">가격</td>
+      <td>
+        <div sec:authorize="hasRole('ROLE_ADMIN')">
+          <a class="btn btn-primary btn-sm" th:href="@{'/products/edit/' + ${product.id}}">수정</a>
+          <a class="btn btn-danger btn-sm" th:href="@{'/products/delete/' + ${product.id}}">삭제</a>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Bootstrap JS fragment 삽입 -->
+<div th:insert="~{common :: commonScript}"></div>
+</body>
+</html>

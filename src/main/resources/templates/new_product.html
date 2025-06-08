@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="~{common :: commonHead}">
+  <title>제품 관리 사이트</title>
+</head>
+
+<body>
+<div class="container">
+  <h1 class="mt-5 text-center">제품 등록</h1>
+  <br />
+  <form th:action="@{/products/save}" th:object="${product}" method="post">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="productName" class="form-label">제품명 :</label>
+          <input type="text" id="productName" class="form-control" th:field="*{name}" />
+        </div>
+        <div class="mb-3">
+          <label for="brand" class="form-label">브랜드 :</label>
+          <input type="text" id="brand" class="form-control" th:field="*{brand}" />
+        </div>
+        <div class="mb-3">
+          <label for="madeIn" class="form-label">제조국 :</label>
+          <input type="text" id="madeIn" class="form-control" th:field="*{madeIn}" />
+        </div>
+        <div class="mb-3">
+          <div class="text-danger" th:if="${invalidPrice}">
+            가격은 0원 이상이어야 합니다.
+          </div>
+
+          <label for="price" class="form-label">가격 :</label>
+          <input type="text" id="price" class="form-control" th:field="*{price}" />
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary">등록</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- Bootstrap JS 삽입 -->
+<div th:insert="~{common :: commonScript}"></div>
+</body>
+</html>

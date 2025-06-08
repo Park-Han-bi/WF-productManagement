@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <title>제품 관리 사이트</title>
+</head>
+<body>
+    <h2>반갑습니다, 관리자님(<span sec:authentication="principal.username">User</span>)</h2>
+
+    <h4 class="mt-4">전체 사용자 목록</h4>
+    <table class="table table-bordered mt-3">
+        <thead>
+        <tr>
+            <th>이메일</th>
+            <th>권한</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${userList}">
+            <td th:text="${user.email}">email@example.com</td>
+            <td>
+                <ul>
+                    <li th:each="role : ${user.roles}" th:text="${role.rolename}">ROLE_USER</li>
+                </ul>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="text-end mt-4">
+        <a class="btn btn-secondary" th:href="@{/home}">홈 화면</a>
+    </div>
+</body>
+
+</html>
